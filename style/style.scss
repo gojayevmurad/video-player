@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: hsla(217, 100%, 50%, 1);
+
+  background: linear-gradient(
+    90deg,
+    hsla(217, 100%, 50%, 1) 0%,
+    hsla(186, 100%, 69%, 1) 100%
+  );
+}
+
+.app {
+  width: 1000px;
+  height: 600px;
+  border: 1px solid hsl(0, 0%, 93%);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  &--main {
+    height: 500px;
+    width: 100%;
+
+    &__body {
+      height: 400px;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      video {
+        width: 450px;
+        border-radius: 20px;
+        height: min-content;
+      }
+
+      .playlist {
+        width: 450px;
+        overflow-y: scroll;
+        align-self: normal;
+
+        &--item {
+          padding: 20px 10px;
+          border: 1px solid hsl(0, 0%, 93%);
+          cursor: pointer;
+          margin-bottom: 5px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          img {
+            height: 50px;
+            width: 50px;
+          }
+          &.active {
+            background-color: hsl(0, 0%, 69%);
+          }
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
