@@ -1,3 +1,13 @@
+const $ = (data) => document.querySelector(data);
+
+const playPauseBtn = $(".play_pause");
+const prevBtn = $(".prevBtn");
+const nextBtn = $(".nextBtn");
+const videoEl = $("video");
+const playlist = $(".playlist");
+const progressBar = $(".progressbar");
+const progressBarControl = $(".progressbar_control");
+
 const videos = [
   {
     title:
@@ -22,11 +32,11 @@ const videos = [
   },
 ];
 
-const videoEl = document.querySelector("video");
-const playlist = document.querySelector(".playlist");
+let currentVideo = 0;
+let lastVideo = videos.length - 1;
 
 function createElements() {
-  videos.forEach((item) => {
+  videos.forEach((item, index) => {
     let playlistItem = document.createElement("div");
     playlistItem.setAttribute("data-title", `${item.title}`);
     playlistItem.classList = "playlist--item";
@@ -39,14 +49,52 @@ function createElements() {
     `;
     playlist.appendChild(playlistItem);
     playlistItem.addEventListener("click", (e) => {
-      changeVideo(playlistItem);
+      currentVideo = index;
+      changeVideo(index);
     });
   });
 }
 
-function changeVideo(item) {
-  videoEl.src = `./videos/${item.dataset.title}.mp4`
-  videoEl.play()
+
+
+
+nextBtn.addEventListener("click", () => {
+  if (currentVideo == lastVideo) {
+    currentVideo = 0;
+  } else {
+    currentVideo++;
+  }
+  changeVideo(currentVideo);
+});
+
+prevBtn.addEventListener("click", () => {
+  if (currentVideo == 0) {
+    currentVideo = lastVideo;
+  } else {
+    currentVideo--;
+  }
+  changeVideo(currentVideo);
+});
+
+playPauseBtn.addEventListener("click", () => {
+  if (videoEl.paused) {
+    videoEl.play();
+    playPauseBtn.innerHTML = "❚ ❚";
+  } else {
+    videoEl.pause();
+    playPauseBtn.innerHTML = "►";
+  }
+});
+
+videoEl.addEventListener("timeupdate", () => {
+  const { currentTime, duration } = videoEl;
+  let percent = (currentTime / duration) * 100;
+  progressBar.style.width = percent + "%";
+});
+
+function changeVideo(index) {
+  videoEl.src = `./videos/${videos[index].title}.mp4`;
+  videoEl.play();
 }
 
 createElements();

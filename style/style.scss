@@ -24,7 +24,6 @@ body {
 
 .app {
   width: 1000px;
-  height: 600px;
   border: 1px solid hsl(0, 0%, 93%);
   border-radius: 20px;
   overflow: hidden;
@@ -40,10 +39,54 @@ body {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      video {
-        width: 450px;
-        border-radius: 20px;
-        height: min-content;
+      .video {
+        position: relative;
+        overflow: hidden;
+        video {
+          width: 450px;
+          height: min-content;
+        }
+        button {
+          position: absolute;
+          bottom: 10px;
+          width: 50px;
+          cursor: pointer;
+          border: none;
+          outline: none;
+          height: 30px;
+          border-radius: 7px;
+
+        }
+        .play_pause {
+          left: 15px;
+        }
+        .prevBtn {
+          left: 75px;
+        }
+        .nextBtn {
+          left: 130px;
+        }
+
+        .progressbar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          background-color: red;
+          height: 4px;
+          transition: .4s;
+        }
+
+        .progressbar_control{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background-color: transparent;
+          height: 4px;
+          transition: .4s;
+          z-index: 2;
+        }
       }
 
       .playlist {
